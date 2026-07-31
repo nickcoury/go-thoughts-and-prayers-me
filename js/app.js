@@ -216,8 +216,9 @@ async function handleDonate(e, slug) {
             website: form.website?.value || "", // honeypot
         };
 
-        const updated = await apiPost(`/campaigns/${slug}/donate`, data);
+        await apiPost(`/campaigns/${slug}/donate`, data);
         showToast("Your thoughts and prayers have been received. Thank you. 💚");
+        const updated = await apiGet(`/campaigns/${slug}`);
         renderCampaignDetail(updated);
         form.thoughts.value = 1;
         form.prayers.value = 0;
