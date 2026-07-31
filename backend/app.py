@@ -17,6 +17,15 @@ from flask import Flask, request, jsonify, g
 
 app = Flask(__name__)
 
+# ── CORS ───────────────────────────────────────────────────────────
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    response.headers["Access-Control-Max-Age"] = "86400"
+    return response
+
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "thoughts.db")
 
 # ── Rate limiting ──────────────────────────────────────────────────
