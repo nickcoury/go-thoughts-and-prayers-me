@@ -1,0 +1,4 @@
+backend/thoughts.db
+venv/
+__pycache__/
+*.pyc

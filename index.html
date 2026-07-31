@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoThoughtsAndPrayersMe — Send the Support That Truly Matters</title>
+    <meta name="description" content="The leading platform for collecting thoughts and prayers. When words are all you have, make them count.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💚</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">💚</span>
+                GoThoughtsAndPrayersMe
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Discover</a></li>
+                    <li><a href="create.html" class="btn btn-outline">Start a Campaign</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Send the support that truly matters.</h1>
+        <p>
+            In times of crisis, people need more than money. They need to know someone,
+            somewhere, is thinking about them. GoThoughtsAndPrayersMe connects those in
+            need with the intangible emotional support they deserve.
+        </p>
+        <a href="create.html" class="btn btn-lg">Start a Campaign →</a>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-number" id="total-thoughts">—</div>
+                <div class="hero-stat-label">Thoughts Delivered</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number" id="total-prayers">—</div>
+                <div class="hero-stat-label">Prayers Offered</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-number" id="total-campaigns">—</div>
+                <div class="hero-stat-label">Active Campaigns</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Trending Campaigns</h2>
+        <p class="section-subtitle">These causes need your emotional investment right now.</p>
+        <div id="campaigns-grid" class="campaign-grid">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading campaigns...</p>
+            </div>
+        </div>
+    </main>
+
+    <section class="container" style="margin-top: 48px; text-align: center;">
+        <div style="background: var(--white); border-radius: var(--radius-lg); padding: 48px 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);">
+            <h2 style="font-size: 1.5rem; margin-bottom: 12px;">How It Works</h2>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px;">
+                Our platform is built on the proven principle that collective emotional energy
+                has measurable effects on outcomes. Here's how:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: center;">
+                <div>
+                    <div style="font-size: 2.5rem; margin-bottom: 8px;">1</div>
+                    <h3 style="font-size:1rem;margin-bottom:4px;">Create a Campaign</h3>
+                    <p style="font-size:.85rem;color:var(--text-muted)">Describe your situation and set goals for thoughts and prayers.</p>
+                </div>
+                <div>
+                    <div style="font-size: 2.5rem; margin-bottom: 8px;">2</div>
+                    <h3 style="font-size:1rem;margin-bottom:4px;">Receive Support</h3>
+                    <p style="font-size:.85rem;color:var(--text-muted)">Your campaign is visible to a global community of compassionate thinkers.</p>
+                </div>
+                <div>
+                    <div style="font-size: 2.5rem; margin-bottom: 8px;">3</div>
+                    <h3 style="font-size:1rem;margin-bottom:4px;">Experience Results</h3>
+                    <p style="font-size:.85rem;color:var(--text-muted)">Benefit from the cumulative weight of directed emotional energy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <ul class="footer-links">
+                <li><a href="#">About</a></li>
+                <li><a href="#">How It Works</a></li>
+                <li><a href="#">Trust &amp; Safety</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="footer-trust">
+                <span class="trust-badge"><span class="badge-icon">🔒</span> SSL Encrypted</span>
+                <span class="trust-badge"><span class="badge-icon">✅</span> Verified Platform</span>
+                <span class="trust-badge"><span class="badge-icon">💚</span> Thought Leader Approved</span>
+                <span class="trust-badge"><span class="badge-icon">🌐</span> Global Reach</span>
+            </div>
+            <p class="footer-disclaimer">
+                GoThoughtsAndPrayersMe is a platform for emotional support. Thoughts and prayers
+                are non-refundable and results may vary. No thoughts or prayers were harmed in the
+                making of this platform. © 2026 GoThoughtsAndPrayersMe. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+    (async () => {
+        try {
+            const campaigns = await apiGet("/campaigns");
+
+            // Update hero stats
+            let totalThoughts = 0, totalPrayers = 0;
+            campaigns.forEach(c => {
+                totalThoughts += c.current_thoughts;
+                totalPrayers += c.current_prayers;
+            });
+            document.getElementById("total-thoughts").textContent = fmt(totalThoughts);
+            document.getElementById("total-prayers").textContent = fmt(totalPrayers);
+            document.getElementById("total-campaigns").textContent = campaigns.length;
+
+            // Render cards
+            const grid = document.getElementById("campaigns-grid");
+            if (campaigns.length === 0) {
+                grid.innerHTML = `<div class="empty-state">
+                    <div class="empty-icon">💚</div>
+                    <h3>No campaigns yet</h3>
+                    <p>Be the first to start one.</p>
+                </div>`;
+            } else {
+                grid.innerHTML = campaigns.map(renderCampaignCard).join("");
+            }
+        } catch (err) {
+            document.getElementById("campaigns-grid").innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">⚠️</div>
+                    <h3>Unable to load campaigns</h3>
+                    <p>Please try again later.</p>
+                </div>`;
+        }
+    })();
+    </script>
+</body>
+</html>

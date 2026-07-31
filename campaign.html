@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign — GoThoughtsAndPrayersMe</title>
+    <meta name="description" content="View and support this campaign with your thoughts and prayers.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💚</text></svg>">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="logo">
+                <span class="logo-icon">💚</span>
+                GoThoughtsAndPrayersMe
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/">Discover</a></li>
+                    <li><a href="create.html" class="btn btn-outline">Start a Campaign</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container campaign-detail" style="padding-top: 32px; padding-bottom: 48px;">
+        <div id="campaign-detail">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading campaign...</p>
+            </div>
+        </div>
+
+        <div id="donate-form-container"></div>
+        <div id="donations-list"></div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-trust">
+                <span class="trust-badge"><span class="badge-icon">🔒</span> SSL Encrypted</span>
+                <span class="trust-badge"><span class="badge-icon">✅</span> Verified Platform</span>
+                <span class="trust-badge"><span class="badge-icon">💚</span> Thought Leader Approved</span>
+            </div>
+            <p class="footer-disclaimer">
+                Thoughts and prayers are non-refundable. Results may vary.
+                © 2026 GoThoughtsAndPrayersMe.
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+    (async () => {
+        const slug = getParam("slug") || getParam("id");
+        if (!slug) {
+            document.getElementById("campaign-detail").innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">🔍</div>
+                    <h3>Campaign not specified</h3>
+                    <p><a href="/">Browse campaigns</a></p>
+                </div>`;
+            return;
+        }
+
+        try {
+            const campaign = await apiGet(`/campaigns/${slug}`);
+            document.title = `${campaign.title} — GoThoughtsAndPrayersMe`;
+            renderCampaignDetail(campaign);
+        } catch (err) {
+            document.getElementById("campaign-detail").innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">😔</div>
+                    <h3>Campaign not found</h3>
+                    <p>This campaign may have been removed or the link is incorrect.</p>
+                    <p><a href="/">← Back to all campaigns</a></p>
+                </div>`;
+        }
+    })();
+    </script>
+</body>
+</html>
