@@ -434,8 +434,8 @@ img {
     border-radius: 6px;
 }
 
-/* ── Donation Form ──────────────────────────────────────────────── */
-.donate-section {
+/* ── Support Form ──────────────────────────────────────────────── */
+.support-form-section {
     background: var(--white);
     border-radius: var(--radius-lg);
     padding: 32px;
@@ -444,7 +444,7 @@ img {
     border: 1px solid var(--border);
 }
 
-.donate-section h2 {
+.support-form-section h2 {
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -509,8 +509,8 @@ img {
     overflow: hidden;
 }
 
-/* ── Donations List ─────────────────────────────────────────────── */
-.donations-section {
+/* ── Support List ─────────────────────────────────────────────── */
+.support-list-section {
     background: var(--white);
     border-radius: var(--radius-lg);
     padding: 32px;
@@ -518,13 +518,13 @@ img {
     border: 1px solid var(--border);
 }
 
-.donations-section h2 {
+.support-list-section h2 {
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 20px;
 }
 
-.donation-item {
+.support-item {
     padding: 16px 0;
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -532,11 +532,11 @@ img {
     align-items: flex-start;
 }
 
-.donation-item:last-child {
+.support-item:last-child {
     border-bottom: none;
 }
 
-.donation-avatar {
+.support-avatar {
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -550,12 +550,12 @@ img {
     flex-shrink: 0;
 }
 
-.donation-content {
+.support-content {
     flex: 1;
     min-width: 0;
 }
 
-.donation-header {
+.support-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -564,24 +564,24 @@ img {
     gap: 8px;
 }
 
-.donation-name {
+.support-name {
     font-weight: 700;
     font-size: 0.95rem;
 }
 
-.donation-amount {
+.support-amount {
     font-weight: 700;
     color: var(--green);
     font-size: 0.9rem;
     white-space: nowrap;
 }
 
-.donation-time {
+.support-time {
     font-size: 0.8rem;
     color: var(--text-muted);
 }
 
-.donation-message {
+.support-message {
     font-size: 0.9rem;
     color: var(--text-secondary);
     line-height: 1.5;
@@ -735,8 +735,8 @@ img {
     .campaign-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
     .campaign-header { padding: 20px; }
-    .donate-section { padding: 20px; }
-    .donations-section { padding: 20px; }
+    .support-form-section { padding: 20px; }
+    .support-list-section { padding: 20px; }
     .header-inner { padding: 0 16px; }
     .nav-links { gap: 12px; }
     .campaign-header h1 { font-size: 1.4rem; }

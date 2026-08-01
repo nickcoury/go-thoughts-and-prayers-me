@@ -128,10 +128,10 @@ function renderCampaignDetail(c) {
         </div>`;
 
     // Donation form
-    document.getElementById("donate-form-container").innerHTML = `
-        <div class="donate-section">
+    document.getElementById("support-form-container").innerHTML = `
+        <div class="support-form-section">
             <h2>Send Your Support</h2>
-            <form id="donate-form" onsubmit="handleDonate(event, '${esc(c.slug)}')">
+            <form id="support-form" onsubmit="handleDonate(event, '${esc(c.slug)}')">
                 <div class="hp-field">
                     <input type="text" name="website" tabindex="-1" autocomplete="off">
                 </div>
@@ -166,19 +166,19 @@ function renderCampaignDetail(c) {
     let donationsHTML = "";
     if (donations.length > 0) {
         donationsHTML = donations.map(d => `
-            <div class="donation-item">
-                <div class="donation-avatar">${initials(d.donor_name)}</div>
-                <div class="donation-content">
-                    <div class="donation-header">
-                        <span class="donation-name">${esc(d.donor_name)}</span>
-                        <span class="donation-amount">
+            <div class="support-item">
+                <div class="support-avatar">${initials(d.donor_name)}</div>
+                <div class="support-content">
+                    <div class="support-header">
+                        <span class="support-name">${esc(d.donor_name)}</span>
+                        <span class="support-amount">
                             ${d.thoughts > 0 ? `💭 ${fmt(d.thoughts)}` : ""}
                             ${d.thoughts > 0 && d.prayers > 0 ? " &middot; " : ""}
                             ${d.prayers > 0 ? `🙏 ${fmt(d.prayers)}` : ""}
                         </span>
                     </div>
-                    <div class="donation-time">${timeAgo(d.created_at)}</div>
-                    ${d.message ? `<div class="donation-message">${esc(d.message)}</div>` : ""}
+                    <div class="support-time">${timeAgo(d.created_at)}</div>
+                    ${d.message ? `<div class="support-message">${esc(d.message)}</div>` : ""}
                 </div>
             </div>
         `).join("");
@@ -190,8 +190,8 @@ function renderCampaignDetail(c) {
         </div>`;
     }
 
-    document.getElementById("donations-list").innerHTML = `
-        <div class="donations-section">
+    document.getElementById("support-list").innerHTML = `
+        <div class="support-list-section">
             <h2>Recent Support (${donations.length})</h2>
             ${donationsHTML}
         </div>`;
